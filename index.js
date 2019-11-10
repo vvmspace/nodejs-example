@@ -3,6 +3,7 @@ const express = require('express');
 const body = require('body-parser');
 const app = express();
 const log = require('./libs/log');
+const routes = require('./routes');
 
 const {port, host} = config.server;
 
@@ -13,6 +14,8 @@ async function start() {
     app.get('/', (req, res) => {
         res.json({text: 'Welcome'});
     });
+
+    app.use(routes);
 
     app.listen(port, host, () => {
         log(`Listening ${host}:${port}`);
