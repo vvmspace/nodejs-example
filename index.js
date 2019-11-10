@@ -4,6 +4,7 @@ const body = require('body-parser');
 const app = express();
 const log = require('./libs/log');
 const routes = require('./routes');
+const errorHandler = require('./middlewares/errorHandler');
 
 const {port, host} = config.server;
 
@@ -16,6 +17,7 @@ async function start() {
     });
 
     app.use(routes);
+    app.use(errorHandler);
 
     app.listen(port, host, () => {
         log(`Listening ${host}:${port}`);
