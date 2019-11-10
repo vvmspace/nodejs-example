@@ -1,0 +1,19 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "description": "Vladimir V. Myagdeev Node.js code example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvmspace/nodejs-example.git"
+  },
+  "author": "Vladimir V. Myagdeev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvmspace/nodejs-example/issues"
+  },
+  "homepage": "https://github.com/vvmspace/nodejs-example#readme"
+}
