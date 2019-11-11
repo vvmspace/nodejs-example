@@ -41,3 +41,5 @@ npm run containers:start
 npm run containers:stop
 npm run containers:restart
 ```
+
+**/data** directory for **MongoDB** is mapped to **/data/mongo**, please grant access for user.
