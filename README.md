@@ -12,10 +12,16 @@ I have no public node.js repositories. You can use this as node.js skeleton.
 
 ## Run
 
+### Development
+
+```shell script
+npm run dev
+```
+
+### Production
+
 ```shell script
 PORT=7070 HOST=127.0.0.1 node index.js
 ```
-
-(npm scripts coming soon) 
 
 Environment variables are not required, defaults: {port: 7070, host: '127.0.0.1'} (see config/index.js -> server{})
