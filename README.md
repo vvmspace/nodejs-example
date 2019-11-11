@@ -6,8 +6,8 @@ I have no public node.js repositories. You can use this as node.js skeleton.
 
 - config - config as a module
 - libs - directory with libraries
-- middlewares - put Express middlewares (auth, error handler etc) here
 - docker - docker-compose files + deploy scripts here
+- middlewares - put Express middlewares (auth, error handler etc) here
 - routes - put controllers and validators here, see routes/index.js
 - routes/[controller] - folder contains controller.js, validator.js (not required) and index.js files
 - routes/[controller]/index.js - describes routes of controller and validation (later)
