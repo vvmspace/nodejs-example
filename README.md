@@ -25,3 +25,17 @@ PORT=7070 HOST=127.0.0.1 node index.js
 ```
 
 Environment variables are not required, defaults: {port: 7070, host: '127.0.0.1'} (see config/index.js -> server{})
+
+### Containers
+
+**MongoDB** (and **Redis**, may be later, for cache) are configured in **./docker** directory.
+
+[**docker-compose**](https://github.com/docker/compose/releases) is required!
+
+Use scripts:
+
+```shell script
+npm run containers:start
+npm run containers:stop
+npm run containers:restart
+```
