@@ -6,9 +6,15 @@ class TestController{
         this.text = this.text.bind(services);
     }
     index(req, res){
-        res.json({test: 'index'});
+        this.models.notice.find().then(notices => {
+            res.json(notices);
+        });
+        // res.json({test: 'index'});
     }
     text(req, res){
+        this.models.notice.create({
+            message: (new Date()).toISOString(),
+        });
         res.json({test: 'text'});
     }
 }
