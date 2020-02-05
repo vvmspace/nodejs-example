@@ -5,6 +5,7 @@ const app = express();
 const log = require('./libs/log');
 const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
+const useragent = require('express-useragent');
 require('./cron');
 
 const {port, host} = config.server;
@@ -16,7 +17,7 @@ async function start() {
     app.get('/', (req, res) => {
         res.json({text: 'Welcome'});
     });
-
+    app.use(useragent.express());
     app.use(routes);
     app.use(errorHandler);
 
