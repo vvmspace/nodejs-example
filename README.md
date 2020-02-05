@@ -1,10 +1,12 @@
 # Node.js skeleton example
 
-I have no public node.js repositories. You can use this as node.js skeleton.
+I have no public node.js repositories for show my code examples. You can use this as node.js skeleton.
 
 ## TODO:
 
-- check and configure mongodb with mongoose and redis
+- configure **mongoose** with **MongoDB** and **Redis** as a cache
+- create **CRUD** example
+- basic postman file
 
 ## Directories
 
