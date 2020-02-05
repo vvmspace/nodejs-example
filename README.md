@@ -2,6 +2,10 @@
 
 I have no public node.js repositories. You can use this as node.js skeleton.
 
+## TODO:
+
+- check and configure mongodb with mongoose and redis
+
 ## Directories
 
 - **config** - config as a module
