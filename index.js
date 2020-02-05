@@ -5,6 +5,7 @@ const app = express();
 const log = require('./libs/log');
 const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
+require('./cron');
 
 const {port, host} = config.server;
 

@@ -5,6 +5,7 @@ I have no public node.js repositories. You can use this as node.js skeleton.
 ## Directories
 
 - **config** - config as a module
+- **cron** - cron tasks (see *cron/index.js*)
 - **libs** - directory with libraries
 - **docker** - docker-compose files + deploy scripts here
 - **middlewares** - put Express middlewares (auth, error handler etc) here
