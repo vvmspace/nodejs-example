@@ -8,3 +8,8 @@ services:
       - 27017:27017
     volumes:
       - /data:/data/mongo
+  redis:
+    container_name: redis_cache
+    image: redis
+    expose:
+      - 6379
