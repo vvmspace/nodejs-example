@@ -4,7 +4,6 @@ I have no public node.js repositories for show my code examples. You can use thi
 
 ## TODO:
 
-- configure **mongoose** with **MongoDB** and **Redis** as a cache
 - create **CRUD** example
 - basic postman file
 
