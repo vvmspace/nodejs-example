@@ -6,7 +6,7 @@ module.exports = {
     },
     mongodb: {
         db: process.env.DB_NAME || "example",
-        host: process.env.DB_HOST || "mongodb://localhost:27017",
+        host: process.env.DB_HOST || "mongodb://localhost:27018",
         options: {
             autoReconnect: true,
             reconnectTries: 1000,
