@@ -5,9 +5,9 @@ services:
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
-      - /data:/data/mongo
+      - ~/data:/data/mongo
   redis:
     container_name: redis_cache
     image: redis
