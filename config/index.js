@@ -5,7 +5,7 @@ module.exports = {
         protocol: process.env.PROTOCOL || 'http',
     },
     mongodb: {
-        db: process.env.DB_NAME || "example",
+        db: process.env.DB_NAME || "concertmoscow",
         host: process.env.DB_HOST || "mongodb://localhost:27017",
         options: {
             autoReconnect: true,

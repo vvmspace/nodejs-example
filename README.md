@@ -4,8 +4,13 @@ I have no public node.js repositories for show my code examples. You can use thi
 
 ## TODO:
 
-- create **CRUD** example
-- basic postman file
+- venueModel
+- artistModel
+- parse group and migrate web_tag_groups
+- title parsing logic
+- textru api for top text
+- API
+- filters
 
 ## Directories
 
