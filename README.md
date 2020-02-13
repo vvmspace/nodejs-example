@@ -1,4 +1,4 @@
-# Node.js skeleton example
+# concert.moscow backend - experimental branch from Node.js skeleton example
 
 I have no public node.js repositories for show my code examples. You can use this as node.js skeleton.
 
