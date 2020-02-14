@@ -30,10 +30,10 @@ const parse_xml = async () => {
     const xml = await fs.readFile(filename,  "utf8");
     const obj = parser.parse(xml);
     const events = obj.event_for_export_list.event_for_export_row;
-    let i = 0;
     bar.start(events.length, 0);
-    await Promise.all(events.map(async (_event) => {
-        i++;
+    let _event;
+    for (let i = 0; i < events.length; i++) {
+        _event = events[i];
         bar.update(i);
         const event = await eventSchema.findOne({ponominalu_id: _event.id}).catch(e => e) || new eventSchema({ponominalu_id: _event.id});
         event.ponominalu_id = _event.id;
@@ -54,7 +54,8 @@ const parse_xml = async () => {
         event.age = _event.age;
         await event.save();
 
-        const venue = await venueSchema.findOne({ponominalu_id: _event.venue_id}).catch(e => e) || new venueSchema({ponominalu_id: _event.venue_id});
+        const venue_search = await venueSchema.findOne({$or: [{alias: _event.venue_alias}, {ponominalu_id: _event.venue_id}]}).catch(e => log(e));
+        const venue = venue_search || new venueSchema({ponominalu_id: _event.venue_id});
         if (!venue.ssr) {
             venue.name = _event.venue;
             venue.alias = _event.venue_alias;
@@ -70,8 +71,7 @@ const parse_xml = async () => {
             venue.events.push(event._id);
             await venue.save();
         }
-
-    }));
+    }
     bar.stop();
 };
 
