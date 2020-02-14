@@ -9,7 +9,7 @@ const bar = new cliProgress.SingleBar({});
 
 const log = require('../libs/log');
 
-const url = 'https://storage.vvm.space/partner_events_feed_export.xml';
+const url = 'https://ponominalu.ru/xml/partner_events_feed_export.xml';
 const tmpdir = path.join(__dirname + '/../tmp');
 const filename = `${tmpdir}/partner_events_feed_export.xml`;
 const eventSchema = require('../models/event');
