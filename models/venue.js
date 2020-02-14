@@ -9,6 +9,18 @@ const venueSchema = new mongoose.Schema({
         unique: true,
     },
     // todo: todo
+    ponominalu_id: Number,
+    location: {
+        type: { type: String, enum: 'Point', default: 'Point' },
+        coordinates: [Number],
+    },
+    name: String,
+    alias: String,
+    address: String,
+    events: [{
+        ref: 'event',
+        type: mongoose.Schema.Types.ObjectId,
+    }],
     ssr: Boolean,
 }, { timestamps: true, id: false });
 

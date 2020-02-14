@@ -1,23 +1,25 @@
 // Simple example of cron task
 
 const {promises:fs} = require('fs');
-const Promise = require('bluebird');
-const parser = require('fast-xml-parser');
-const log = require('../libs/log');
-const {exec} = require('node-exec-promise');
 const path = require('path');
-const {server} = require('../config');
-log(server);
+const parser = require('fast-xml-parser');
+const {exec} = require('node-exec-promise');
+const cliProgress = require('cli-progress');
+const bar = new cliProgress.SingleBar({});
+
+const log = require('../libs/log');
+
 const url = 'https://storage.vvm.space/partner_events_feed_export.xml';
 const tmpdir = path.join(__dirname + '/../tmp');
 const filename = `${tmpdir}/partner_events_feed_export.xml`;
-const bar = require('cli-progress');
 const eventSchema = require('../models/event');
+const venueSchema = require('../models/venue');
 
 const parse = () => {
     exec(`wget ${url} -O ${filename}`)
         .then(async () => {
             await parse_xml();
+            require('../libs/mongoose').disconnect();
         })
         .catch(e => log(e));
 };
@@ -31,7 +33,9 @@ const parse_xml = async () => {
     let i = 0;
     bar.start(events.length, 0);
     await Promise.all(events.map(async (_event) => {
-        const event = await eventSchema.findOne({ponominalu_id: _event.id}).then(e => e || eventSchema.create({ponominalu_id: _event.id}));
+        i++;
+        bar.update(i);
+        const event = await eventSchema.findOne({ponominalu_id: _event.id}).catch(e => e) || new eventSchema({ponominalu_id: _event.id});
         event.ponominalu_id = _event.id;
         event.name = _event.title;
         event.title = _event.title;
@@ -48,16 +52,30 @@ const parse_xml = async () => {
         event.max_price = _event.max_price;
         event.image = _event.image;
         event.age = _event.age;
-        event.save();
-        i++;
-        bar.update(i);
+        await event.save();
+
+        const venue = await venueSchema.findOne({ponominalu_id: _event.venue_id}).catch(e => e) || new venueSchema({ponominalu_id: _event.venue_id});
+        if (!venue.ssr) {
+            venue.name = _event.venue;
+            venue.alias = _event.venue_alias;
+            venue.address = _event.venue_address;
+        }
+        venue.ponominalu_id = _event.venue_id;
+        await venue.save();
+
+        event.venue = venue._id;
+        await event.save();
+
+        if (!venue.events.find(ev => ev.equals(event._id))) {
+            venue.events.push(event._id);
+            await venue.save();
+        }
+
     }));
     bar.stop();
-//            log('Parse something here (comment this in cron/index.js or modify cron/parse.js');
-
 };
 
-
-if (module && module.exports) {
-    module.exports = parse;
+module.exports = parse;
+if (!module.parent) {
+    parse();
 }

@@ -25,6 +25,10 @@ const eventSchema = new mongoose.Schema({
     image: String,
     age: Number,
     message: String,
+    venue: {
+        ref: 'venue',
+        type: mongoose.Schema.Types.ObjectId,
+    },
     ssr: Boolean,
 }, { timestamps: true, id: false });
 
