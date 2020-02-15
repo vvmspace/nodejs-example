@@ -1,6 +1,6 @@
 module.exports = {
     server: {
-        port: process.env.PORT || 7070,
+        port: process.env.PORT || 7007,
         host: process.env.HOST || '127.0.0.1',
         protocol: process.env.PROTOCOL || 'http',
     },

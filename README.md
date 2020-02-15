@@ -34,7 +34,7 @@ npm run dev
 ### Production
 
 ```shell script
-PORT=7070 HOST=127.0.0.1 node index.js
+PORT=7007 HOST=127.0.0.1 node index.js
 ```
 
 Environment variables are not required, defaults: {port: 7070, host: '127.0.0.1'} (see config/index.js -> server{})
