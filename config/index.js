@@ -1,7 +1,7 @@
 module.exports = {
     server: {
         port: process.env.PORT || 7007,
-        host: process.env.HOST || '127.0.0.1',
+        host: process.env.HOST || '0.0.0.0',
         protocol: process.env.PROTOCOL || 'http',
     },
     mongodb: {
