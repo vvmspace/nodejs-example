@@ -14,6 +14,8 @@ const tmpdir = path.join(__dirname + '/../tmp');
 const filename = `${tmpdir}/partner_events_feed_export.xml`;
 const eventSchema = require('../models/event');
 const venueSchema = require('../models/venue');
+const Entities = require('html-entities').XmlEntities;
+const entities = new Entities();
 
 const parse = () => {
     exec(`wget ${url} -O ${filename}`)
@@ -37,9 +39,9 @@ const parse_xml = async () => {
         bar.update(i);
         const event = await eventSchema.findOne({ponominalu_id: _event.id}).catch(e => e) || new eventSchema({ponominalu_id: _event.id});
         event.ponominalu_id = _event.id;
-        event.name = _event.title;
-        event.title = _event.title;
-        event.description = _event.description;
+        event.name = entities.decode(_event.title);
+        event.title = event.name;
+        event.description = entities.decode(_event.description);
         event.date = _event.date;
         event.end_date = _event.end_date;
         event.url = _event.url;
@@ -57,9 +59,9 @@ const parse_xml = async () => {
         const venue_search = await venueSchema.findOne({$or: [{alias: _event.venue_alias}, {ponominalu_id: _event.venue_id}]}).catch(e => log(e));
         const venue = venue_search || new venueSchema({ponominalu_id: _event.venue_id});
         if (!venue.ssr) {
-            venue.name = _event.venue;
+            venue.name = entities.decode(_event.venue);
             venue.alias = _event.venue_alias;
-            venue.address = _event.venue_address;
+            venue.address = entities.decode(_event.venue_address);
         }
         venue.ponominalu_id = _event.venue_id;
         await venue.save();
