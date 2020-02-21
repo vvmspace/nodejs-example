@@ -15,6 +15,11 @@ module.exports = services => {
     );
 
     router.get(
+        '/pop',
+        controller.getRap
+    );
+
+    router.get(
         '/rock',
         controller.getRock
     );

@@ -58,7 +58,7 @@ class EventController{
 
     async getPop(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Поп,.*'}})
+            .find({web_tag_groups: { $regex: '.*Поп.*'}})
             .populate({
                 path: 'venue',
                 model: 'venue',
