@@ -1,11 +1,105 @@
 const log = require('../../libs/log');
 const dateUtil = require('../../libs/date');
+const Friday = dateUtil.dayOfWeek(5);
+const Sunday = dateUtil.dayOfWeek(7);
+
 
 class EventController{
     constructor(services){
         this.getEventByUuid = this.getEventByUuid.bind(services);
         this.getEventIndex = this.getEventIndex.bind(services);
+        this.getRock = this.getRock.bind(services);
+        this.getRap = this.getRap.bind(services);
+        this.getJazz = this.getJazz.bind(services);
+        this.getToday = this.getToday.bind(services);
+        this.getTomorrow = this.getTomorrow.bind(services);
+        this.getWeekly = this.getWeekly.bind(services);
+        this.getWeekends = this.getWeekends.bind(services);
+        this.getPop = this.getPop.bind(services);
+        this.getTrance = this.getTrance.bind(services);
+        this.getHouse = this.getHouse.bind(services);
+        this.getElectro = this.getElectro.bind(services);
     }
+
+
+
+    async getRock(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Рок.*' }})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getRap(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Рэп,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getJazz(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Джаз,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getPop(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Поп,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getElectro(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Электро,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getTrance(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Транс,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getHouse(request, response, next) {
+        const events = await this.models.event
+            .find({web_tag_groups: { $regex: '.*Хаус,.*'}})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
     getEventByUuid(request, response, next) {
         const { uuid } = request.params;
 
@@ -18,14 +112,73 @@ class EventController{
             .then(event => response.json(event))
             .catch(next);
     }
+
+    // Todo: fix dates
+
+    async getToday(request, response, next) {
+        const tomorrow = dateUtil.tomorrow();
+        const events = await this.models.event
+            .find({$and:[{date: {$gte: (new Date())}},
+                    {date: {$lt: tomorrow}},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {min_price: {$gt: 499}}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getTomorrow(request, response, next) {
+        const tomorrow = dateUtil.tomorrow();
+        const events = await this.models.event
+            .find({$and:[{date: {$gte: tomorrow}},
+                    {date: {$lt: tomorrow.add(1, 'days')}},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {min_price: {$gt: 499}}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getWeekly(request, response, next) {
+        const events = await this.models.event
+            .find({$and:[{date: {$gte: (new Date())}},
+                    {date: {$lt: Sunday}},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {min_price: {$gt: 899}}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            })
+        response.json({events});
+    }
+
+
+
+    async getWeekends(request, response, next) {
+        const events = await this.models.event
+            .find({$and:[{date: {$gte: Friday}},
+                    {date: {$lte: Sunday}},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {min_price: {$gt: 799}}
+                ]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+
+
     async getEventIndex(request, response, next) {
-        // this.models.event.find({})
-        //     // .select('-_id, -__v -excluded')
-        //     .then(event => response.json({a:'a'}))
-        //     .catch(next);
-        const Monday = dateUtil.dayOfWeek(1);
-        const Friday = dateUtil.dayOfWeek(5);
-        const Sunday = dateUtil.dayOfWeek(7);
 
         const top = await this.models.event
             .find()

@@ -11,6 +11,12 @@ const dayOfWeek = dayIsNeed => {
     }
 }
 
+const tomorrow = () => {
+    const today = moment().isoWeekday();
+    return moment().isoWeekday(today)/*.add(1, 'days')*/;
+}
+
 module.exports = {
-    dayOfWeek
+    dayOfWeek,
+    tomorrow,
 };
