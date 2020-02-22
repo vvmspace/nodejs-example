@@ -69,7 +69,10 @@ class EventController{
 
     async getElectro(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Электро,.*'}})
+            .find({$and: [
+                {web_tag_groups: { $regex: '.*Электро,.*'}},
+                    {max_price: {$gt: 1000}}
+                ]})
             .populate({
                 path: 'venue',
                 model: 'venue',
