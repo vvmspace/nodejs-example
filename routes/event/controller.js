@@ -190,7 +190,7 @@ class EventController{
                 model: 'venue',
                 select: '-events',
             })
-            .sort({SSR: -1, max_price: -1})
+            .sort({ssr: -1, max_price: -1})
             .limit(30);
 
         const weekly = await this.models.event
