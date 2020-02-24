@@ -106,7 +106,7 @@ class EventController{
     getEventByUuid(request, response, next) {
         const { uuid } = request.params;
 
-        this.models.event.findOne({ uuid })
+        this.models.event.findOne({$or: [{ uuid }, {alias : uuid}]})
             .select('-_id, -__v -excluded')
             .populate({
                 path: 'venue',
