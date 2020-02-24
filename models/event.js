@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    alias: String,
     ponominalu_id: Number,
     name: String,
     title: String,
