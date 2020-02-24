@@ -34,7 +34,7 @@ const parse_xml = async () => {
     const events = obj.event_for_export_list.event_for_export_row;
     bar.start(events.length, 0);
     let _event;
-    await eventSchema.update({uuid: '1UI-q6B8k-'}, {$set: {description: '<p><b>Fedde Le Grand</b> выступит <b>8 марта</b> в <b>WOW Dinner Show Restaurant & Club</b>, на вечеринке от проекта <b>«BONFIRE»</b>.</p><p>Культовый DJ исполнит свои лучшие композиции в своем крутом сете. Уже 15 лет Fedde Le Grand радует своих поклонников хитами EDM индустрии. Его хит «Put Your Hands Up For Detroit» принес ему всемирную известность, он пользуется большой популярностью в самых крупных танцевальных мероприятиях мира. У вас есть уникальный шанс услышать его в живую на его выступлении в Москве!</p><p>В рамках мероприятия также выступят:</p><p>Basky — московский диджей и продюсер<p><p>DJ Martinez</p><p>Лайн-ап будет пополняться</p>'}});
+    await eventSchema.update({uuid: '1UI-q6B8k-'}, {$set: {description: '<p><b>Fedde Le Grand</b> выступит <b>8 марта</b> в <b>WOW Dinner Show Restaurant & Club</b>, на вечеринке от проекта <b>«BONFIRE»</b>.</p><p>Культовый DJ исполнит свои лучшие композиции в своем крутом сете. Уже 15 лет Fedde Le Grand радует своих поклонников хитами EDM индустрии. Его хит «Put Your Hands Up For Detroit» принес ему всемирную известность, он пользуется большой популярностью в самых крупных танцевальных мероприятиях мира. У вас есть уникальный шанс услышать его в живую на его выступлении в Москве!</p><p>В рамках мероприятия также выступят:</p><p>Basky — московский диджей и продюсер<p><p>DJ Martinez</p><p>Лайн-ап будет пополняться</p>', alias: 'fedde-le-grand'}});
     for (let i = 0; i < events.length; i++) {
         _event = events[i];
 
@@ -70,7 +70,9 @@ const parse_xml = async () => {
         event.max_price = _event.max_price;
         event.image = _event.image;
         event.age = _event.age;
-        event.alias = alias;
+        if (!event.alias) {
+            event.alias = alias;
+        }
         event.updatedAt = new Date();
         await event.save();
 
