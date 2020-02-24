@@ -34,14 +34,30 @@ const parse_xml = async () => {
     const events = obj.event_for_export_list.event_for_export_row;
     bar.start(events.length, 0);
     let _event;
+    await eventSchema.update({uuid: '1UI-q6B8k-'}, {$set: {description: '<p><b>Fedde Le Grand</b> выступит <b>8 марта</b> в <b>WOW Dinner Show Restaurant & Club</b>, на вечеринке от проекта <b>«BONFIRE»</b>.</p><p>Культовый DJ исполнит свои лучшие композиции в своем крутом сете. Уже 15 лет Fedde Le Grand радует своих поклонников хитами EDM индустрии. Его хит «Put Your Hands Up For Detroit» принес ему всемирную известность, он пользуется большой популярностью в самых крупных танцевальных мероприятиях мира. У вас есть уникальный шанс услышать его в живую на его выступлении в Москве!</p><p>В рамках мероприятия также выступят:</p><p>Basky — московский диджей и продюсер<p><p>DJ Martinez</p><p>Лайн-ап будет пополняться</p>'}});
     for (let i = 0; i < events.length; i++) {
         _event = events[i];
+
+        let alias = _event.url.split('/event/')[1].split('/')[0];
+        const byAlias = await eventSchema.findOne({alias}).catch(e => e);
+        if (byAlias && (byAlias.ponominalu_id != _event.id)) {
+            const pretty_date = new Date(_event.date).toLocaleString('en', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                timeZone: 'Europe/Moscow'
+            }).toLowerCase().replace(/ /g, "-").replace(',', '');
+            alias = `${alias}-${pretty_date}`;
+        }
+        log(alias);
         bar.update(i);
         const event = await eventSchema.findOne({ponominalu_id: _event.id}).catch(e => e) || new eventSchema({ponominalu_id: _event.id});
         event.ponominalu_id = _event.id;
         event.name = entities.decode(_event.title);
         event.title = event.name;
-        event.description = entities.decode(_event.description);
+        if (!event.SSR) {
+            event.description = entities.decode(_event.description);
+        }
         event.date = _event.date;
         event.end_date = _event.end_date;
         event.url = _event.url;
@@ -54,6 +70,8 @@ const parse_xml = async () => {
         event.max_price = _event.max_price;
         event.image = _event.image;
         event.age = _event.age;
+        event.alias = alias;
+        event.updatedAt = new Date();
         await event.save();
 
         const venue_search = await venueSchema.findOne({$or: [{alias: _event.venue_alias}, {ponominalu_id: _event.venue_id}]}).catch(e => log(e));
