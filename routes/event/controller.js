@@ -190,8 +190,8 @@ class EventController{
                 model: 'venue',
                 select: '-events',
             })
-            .sort({max_price: -1})
-            .limit(24);
+            .sort({SSR: -1, max_price: -1})
+            .limit(30);
 
         const weekly = await this.models.event
             .find({$and:[{date: {$gte: (new Date())}},
