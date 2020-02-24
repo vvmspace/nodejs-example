@@ -25,7 +25,8 @@ class EventController{
 
     async getRock(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Рок.*' }})
+            .find({$and: [{web_tag_groups: { $regex: '.*Рок.*' }},
+                    {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
                 model: 'venue',
@@ -36,7 +37,8 @@ class EventController{
 
     async getRap(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Рэп,.*'}})
+            .find({$and: [{web_tag_groups: { $regex: '.*Рэп,.*'}},
+                    {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
                 model: 'venue',
@@ -47,7 +49,8 @@ class EventController{
 
     async getJazz(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Джаз,.*'}})
+            .find({$and: [{web_tag_groups: { $regex: '.*Джаз,.*'}},
+                    {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
                 model: 'venue',
@@ -58,7 +61,8 @@ class EventController{
 
     async getPop(request, response, next) {
         const events = await this.models.event
-            .find({web_tag_groups: { $regex: '.*Поп.*'}})
+            .find({$and: [{web_tag_groups: { $regex: '.*Поп.*'}},
+                    {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
                 model: 'venue',
@@ -71,7 +75,8 @@ class EventController{
         const events = await this.models.event
             .find({$and: [
                 {web_tag_groups: { $regex: '.*Электро,.*'}},
-                    {max_price: {$gt: 1000}}
+                    {max_price: {$gt: 1000}},
+                    {date: {$gte: (new Date())}}
                 ]})
             .populate({
                 path: 'venue',
