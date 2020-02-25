@@ -77,6 +77,7 @@ class EventController{
             .find({$and: [{min_price: {$gt: 1100}},
                     {category: { $regex: '.*онцерт.*'}},
                     {date: {$gte: (new Date())}}]})
+            .sort({ssr: -1, max_price: -1})
             .populate({
                 path: 'venue',
                 model: 'venue',
