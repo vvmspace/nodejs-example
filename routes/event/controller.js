@@ -16,6 +16,7 @@ class EventController{
         this.getWeekly = this.getWeekly.bind(services);
         this.getWeekends = this.getWeekends.bind(services);
         this.getPop = this.getPop.bind(services);
+        this.getTop = this.getTop.bind(services);
         this.getTrance = this.getTrance.bind(services);
         this.getHouse = this.getHouse.bind(services);
         this.getElectro = this.getElectro.bind(services);
@@ -68,6 +69,18 @@ class EventController{
                 model: 'venue',
                 select: '-events',
             });
+        response.json({events});
+    }
+
+    async getTop(request, response, next) {
+        const events = await this.models.event
+            .find({$and: [{min_price: {$gt: 1000}},{max_price: {$gt: 100000}},
+                    {date: {$gte: (new Date())}}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            }).limit(90);
         response.json({events});
     }
 
