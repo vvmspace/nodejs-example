@@ -74,7 +74,7 @@ class EventController{
 
     async getTop(request, response, next) {
         const events = await this.models.event
-            .find({$and: [{min_price: {$gt: 899}},{max_price: {$gt: 50000}},
+            .find({$and: [{min_price: {$gt: 1100}},
                     {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
