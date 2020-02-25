@@ -31,7 +31,24 @@ const sitemapper = async () => {
                 changefreq: 'weekly',
             };
         });
-    const urls = [...eurls, ...vurls];
+    const customs = [{
+        href: '/rock',
+    },{
+        href: '/rap',
+    },{
+        href: '/electro',
+    },{
+        href: '/top',
+    },{
+        href: '/pop',
+    }];
+    const urls = [...eurls, ...vurls, customs.map(c => {return {
+        url: `https://concert.moscow${c.href}`,
+        loc: `https://concert.moscow${c.href}`,
+        lastmod: new Date().toISOString(),
+        priority: 1,
+        changefreq: 'daily',
+    }})];
     createSitemapsAndIndex({
         hostname: 'https://concert.moscow',
         sitemapName: 'sitemap',
