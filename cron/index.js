@@ -8,4 +8,6 @@ if (process.env.cron_parse) {
     cron.schedule('0 0 0 * * *', parse);
 }
 
-cron.schedule('0 16 * * * *', sitemap);
+if (process.env.cron_sitemap) {
+    cron.schedule('0 16 * * * *', sitemap);
+}
