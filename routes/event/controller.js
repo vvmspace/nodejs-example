@@ -75,6 +75,7 @@ class EventController{
     async getTop(request, response, next) {
         const events = await this.models.event
             .find({$and: [{min_price: {$gt: 1100}},
+                    {category: { $regex: '.*онцерт.*'}},
                     {date: {$gte: (new Date())}}]})
             .populate({
                 path: 'venue',
