@@ -105,7 +105,7 @@ class EventController{
     async getAcoustic(request, response, next) {
         const events = await this.models.event
             .find({$and: [
-                {web_tag_groups: { $regex: '.*кустичес,.*'}},
+                {web_tag_groups: { $regex: '.*кустичес.*'}},
                     {max_price: {$gt: 1000}},
                     {date: {$gte: (new Date())}}
                 ]})
