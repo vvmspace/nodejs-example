@@ -21,7 +21,7 @@ module.exports = services => {
 
     router.get(
         '/acoustic',
-        controller.getElectro
+        controller.getAcoustic
     );
 
     router.get(
