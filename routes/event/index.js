@@ -20,6 +20,11 @@ module.exports = services => {
     );
 
     router.get(
+        '/acoustic',
+        controller.getElectro
+    );
+
+    router.get(
         '/pop',
         controller.getPop
     );

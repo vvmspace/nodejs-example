@@ -20,6 +20,7 @@ class EventController{
         this.getTrance = this.getTrance.bind(services);
         this.getHouse = this.getHouse.bind(services);
         this.getElectro = this.getElectro.bind(services);
+        this.getAcoustic = this.getAcoustic.bind(services);
     }
 
 
@@ -90,6 +91,21 @@ class EventController{
         const events = await this.models.event
             .find({$and: [
                 {web_tag_groups: { $regex: '.*Электро,.*'}},
+                    {max_price: {$gt: 1000}},
+                    {date: {$gte: (new Date())}}
+                ]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getAcoustic(request, response, next) {
+        const events = await this.models.event
+            .find({$and: [
+                {web_tag_groups: { $regex: '.*кустичес,.*'}},
                     {max_price: {$gt: 1000}},
                     {date: {$gte: (new Date())}}
                 ]})
