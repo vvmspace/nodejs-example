@@ -213,6 +213,16 @@ class EventController{
             .sort({max_price: -1})
             .limit(30);
 
+        const ssr = await this.models.event
+            .find({ssr: true})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            })
+            .sort({max_price: -1})
+            .limit(30);
+
         const weekly = await this.models.event
             .find({$and:[{date: {$gte: (new Date())}},
                     {date: {$lt: Sunday}},
@@ -240,7 +250,7 @@ class EventController{
 
 
 
-        response.json({weekly, top, weekends})
+        response.json({ssr, weekly, top, weekends})
     }
 }
 
