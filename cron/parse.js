@@ -53,6 +53,12 @@ const parse_xml = async () => {
 <p>В отличии от <strong>20 лет без Кино</strong> - <strong>30 лет без Кино</strong> будет совсем другим. Исполнять песни Цоя будет сам Виктор. А играть музыку будут 2 басиста, которые в разные годы играли в группе: Игорь Тихомиров и Александр Титов, а так же прошедший всю историю и ставший вторым лицом группы Юрий Каспарян.</p>
 <p>Концерт Кино будет длиться 2 часа и будет оформлен особым видеорядом, содержащий как историческое олицетворение <strong>Виктора Цоя</strong>, так и документальной историей группы.</p>
 <p>Рекомендую купить билеты прямо сейчас, пока они ещё есть.</p>`}});
+    await eventSchema.update({alias: 'og-buda'}, {$set: {ssr: true,
+            description:
+            `<p>Большой и долгожданный альбом «<strong>ОПГ Сити</strong>» самый смелый трэп артист в России <strong>OG Buda</strong>, презентует <strong>28 марта 2020 г.</strong> в «<stong>Главклуб Green Concert</stong>»</p>
+<p>Настоящее имя артиста Григорий Алексеевич Ляхов, Российский хип-хоп исполнитель работает под псевдонимом «<strong>OG Buda</strong>»</p>
+<p>Популярность к исполнителю пришла с треком Tourlife в 2018 году. С того времени он активно занимался записью треков и своего первого, дебютного альбома, который и получил название: «ОПГ Сити».</p>
+<p>Рэпер «OG Buda» со свойственной ему хулиганской харизмой, прямолинейностью и бандитским вайбом 90-ых, погрузит вас в свой мир и даст прочувствовать атмосферу борьбы, братства и криминала.</p>`}});
     for (let i = 0; i < events.length; i++) {
         _event = events[i];
 
@@ -76,10 +82,10 @@ const parse_xml = async () => {
         }
         const event = ev;
         event.ponominalu_id = _event.id;
-        event.name = entities.decode(_event.title);
-        event.title = event.name;
         if (!event.ssr) {
             event.description = entities.decode(_event.description);
+            event.name = entities.decode(_event.title);
+            event.title = event.name;
         }
         event.date = _event.date;
         event.end_date = _event.end_date;
