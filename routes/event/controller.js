@@ -26,11 +26,20 @@ class EventController{
 
     async getTextRequest(request, response, next) {
         const { uuid } = request.params;
-        const _event = await this.models.event.findOne({$or: [{uuid}, {alias: uuid}]}).catch(e => e);
+        const _event = await this.models.event
+            .findOne({$or: [{uuid}, {alias: uuid}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+            })
+            .catch(e => e);
         const event = _event || {};
         const task_text = `
         #Задача:
         Заменить текст https://concert.moscow/concert/${event.alias || event.uuid}
+        
+        ## Ключевые слова:
+        ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}
         `;
         response.json({event, task_text});
     }
