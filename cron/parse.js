@@ -35,14 +35,22 @@ const parse_xml = async () => {
     bar.start(events.length, 0);
     let _event;
     const aliasesd = ['fedde-le-grand', 'matrang', 'og-buda', 'umaturman', 'agutin-leonid'];
-    aliasesd.map(async aliasd => await eventSchema.update({alias: 'agutin-leonid'}, {$set: {
+    aliasesd.map(async alias => await eventSchema.update({alias}, {$set: {
         ref_code: 'concertmoscowd'
         }}));
-    await eventSchema.update({alias: 'agutin-leonid'}, {$set: {ssr: true,
-            description:
-            `<p><strong>Леонид Агутин</strong> начал свою музыкальную карьеру в 1991 году, и вот уже почти 30 лет радует своих слушателей своим творчеством.</p>
-<p>Артист является победителем телешоу две звезды, обладателем девяти дипломов «Песня года», десяти премий «Золотой граммофон», также он был наставником в нескольких сезонах проекта голос, и конечно-же имеет статус заслуженного артиста России, который ему был присвоен 29 декабря 2008 года.</p>
-<p>Приходите <strong>на концерт Леонида Агутина в Крокус</strong> чтобы услышать его лучшие хиты и конечно новые песни в живую.</p>`}});
+    const aliasest = ['ddt'];
+    aliasest.map(async alias => await eventSchema.update({alias}, {$set: {
+        ref_code: 'concertmoscowt'
+        }}));
+    const aliasesv = ['kino'];
+    aliasesv.map(async alias => await eventSchema.update({alias}, {$set: {
+        ref_code: 'concertmoscowv'
+        }}));
+//     await eventSchema.update({alias: 'agutin-leonid'}, {$set: {ssr: true,
+//             description:
+//             `<p><strong>Леонид Агутин</strong> начал свою музыкальную карьеру в 1991 году, и вот уже почти 30 лет радует своих слушателей своим творчеством.</p>
+// <p>Артист является победителем телешоу две звезды, обладателем девяти дипломов «Песня года», десяти премий «Золотой граммофон», также он был наставником в нескольких сезонах проекта голос, и конечно-же имеет статус заслуженного артиста России, который ему был присвоен 29 декабря 2008 года.</p>
+// <p>Приходите <strong>на концерт Леонида Агутина в Крокус</strong> чтобы услышать его лучшие хиты и конечно новые песни в живую.</p>`}});
     for (let i = 0; i < events.length; i++) {
         _event = events[i];
 
