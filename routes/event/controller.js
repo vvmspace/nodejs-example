@@ -21,9 +21,19 @@ class EventController{
         this.getHouse = this.getHouse.bind(services);
         this.getElectro = this.getElectro.bind(services);
         this.getAcoustic = this.getAcoustic.bind(services);
+        this.getTextRequest = this.getTextRequest.bind(services);
     }
 
-
+    async getTextRequest(request, response, next) {
+        const { uuid } = request.params;
+        const _event = await this.models.event.findOne({$or: [{uuid}, {alias: uuid}]}).catch(e => e);
+        const event = _event || {};
+        const task_text = `
+        #Задача:
+        Заменить текст https://concert.moscow/concert/${event.alias || event.uuid}
+        `;
+        response.json({event, task_text});
+    }
 
     async getRock(request, response, next) {
         const events = await this.models.event
