@@ -37,21 +37,21 @@ class EventController{
 
         const task_name = `Написать анонс ${event.category.includes('онцерт') && 'концерта ' || ''}  ${event.name} в Москве`;
         const task_text = `
-        <h1>Задача: Написать анонс ${event.name}.</h1>
-        <p>Нужна замена текста https://concert.moscow/concert/${event.alias || event.uuid} на уникальный</p>
-        <p>&nbsp;</p>
-        <h2>Ключевые слова:</h2>
-        <p>${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата]</p>
-        <p>Проявите фантазию. Смотрите wordstat.yandex.ru и ЦА</p>
-        <p>&nbsp;</p>
-        <h2>Целевая аудитория:</h2>
-        <p>Потенциальные посетители мероприятия, попадающие на сайт через поиск.</p>
-        <p>&nbsp;</p>
-        <h2>Перед выполнением ознакомиться со скриншотом:</h2>
-        <p><a href="https://concert.moscow/how_to_write.png">https://concert.moscow/how_to_write.png</a>
-        <p>&nbsp;</p>
-       <h2>Необходимая длина:</h2>
-       <p>500 - 1000 знаков без пробелов</p>
+        [B]Задача: Написать анонс ${event.name}[/B][BR]
+        Нужна замена текста https://concert.moscow/concert/${event.alias || event.uuid} на уникальный[BR]
+        [BR]
+        [B]Ключевые слова:[/B][BR]
+        ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата][BR]
+        Проявите фантазию. Смотрите wordstat.yandex.ru и ЦА[BR]
+        [BR]
+        [B]Целевая аудитория:[/B]
+        Потенциальные посетители мероприятия, попадающие на сайт через поиск.[BR]
+        [BR]
+        [B]Перед выполнением ознакомиться со скриншотом:[/B][BR]
+        https://concert.moscow/how_to_write.png[BR]
+        [BR]
+       [B]Необходимая длина:[/B][BR]
+       500 - 1000 знаков без пробелов
         `.replace(/\n/g,'');
         response.json({event, task_text, task_name});
     }
