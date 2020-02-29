@@ -39,7 +39,15 @@ class EventController{
         Заменить текст https://concert.moscow/concert/${event.alias || event.uuid}
         
         ## Ключевые слова:
-        ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}
+        ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата]
+        
+        ## Перед выполнением ознакомиться со скриншотом:
+        https://concert.moscow/how_to_write.png
+        
+       ## Необходимая длина:
+       500 - 1000 знаков без пробелов
+        
+        
         `;
         response.json({event, task_text});
     }
