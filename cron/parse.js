@@ -34,21 +34,21 @@ const parse_xml = async () => {
     const events = obj.event_for_export_list.event_for_export_row;
     bar.start(events.length, 0);
     let _event;
-    const aliasesd = ['fedde-le-grand', 'matrang', 'og-buda', 'umaturman', 'agutin-leonid'];
-    aliasesd.map(async alias => await eventSchema.update({alias}, {$set: {
-        ref_code: 'concertmoscowd'
-        }}));
-    const aliasest = ['ddt'];
-    aliasest.map(async alias => await eventSchema.update({alias}, {$set: {
-        ref_code: 'concertmoscowt'
-        }}));
-    const aliasesv = ['kino'];
-    aliasesv.map(async alias => await eventSchema.update({alias}, {$set: {
-        ref_code: 'concertmoscowv'
-        }}));
-    await eventSchema.update({alias: 'duna'}, {$set: {ssr: true, ref_code: 'concertmoscowc',
+    // const aliasesd = ['fedde-le-grand', 'matrang', 'og-buda', 'umaturman', 'agutin-leonid'];
+    // aliasesd.map(async alias => await eventSchema.update({alias}, {$set: {
+    //     ref_code: 'concertmoscowd'
+    //     }}));
+    // const aliasest = ['ddt'];
+    // aliasest.map(async alias => await eventSchema.update({alias}, {$set: {
+    //     ref_code: 'concertmoscowt'
+    //     }}));
+    // const aliasesv = ['kino'];
+    // aliasesv.map(async alias => await eventSchema.update({alias}, {$set: {
+    //     ref_code: 'concertmoscowv'
+    //     }}));
+    await eventSchema.update({alias: 'scooter'}, {$set: {ssr: true, ref_code: 'concertmoscowc',
             description:
-            `<p>Долгожданное событие &ndash; Дюна снова в Москве</p> <p></p> <p>Популярная группа <b>Дюна</b> дебютировала на эстраде в 1987 году. Изначально, команда музыкантов из подмосковного Долгопрудного пробовала себя в качестве рок исполнителей. Но достаточно быстро амплуа переместилось в сферу веселой, юмористической Поп музыки, начав исполнять шлягеры, такие как &laquo;Привет с большого бодуна&raquo; и т.п.</p> <p></p> <p>Прошло более 30 лет и снова <b>Дюна </b>выступит<b> в Москве</b>. 18 июня 2020 года <b>Дюна</b> даст концерт, который состоится в <b>ГЛАВCLUB GREEN CONCERT</b>. Спрос на билеты возрастает по мере приближения даты выступления музыкальной группы. По всему видно, что <b>концерт Дюна</b> станет важным музыкальным событием и соберет огромную команду поклонников веселой, дружелюбной, позитивной музыки.</p> <p></p> <p>Стоимость билетов вполне доступная, но их число ограничено, так что не стоит откладывать все на потом, приобретайте билеты прямо сейчас!</p>`}});
+            `<p><span>Немецкая музыкальная <strong>группа Scooter</strong> в рамках концертного тура посетит Россию, и выступит для <strong>в Москве</strong> для поклонников <strong>14 марта 2020 года</strong>.</span></p> <p></p> <p><span>Создание коллектива датировано 1993 годом. С того времени музыканты стремительно взобрались на Олимп славы, и не покидают его по сей день. Каждый поклонник мечтает попасть на <strong>концерт Scooter</strong>. С момента основания группы была продано более 35 млн. альбомов, а также завоевано масса премий. Хиты занимают первые строчки во всех чартах как в Германии, так и в других странах.</span></p> <p></p> <p><span>Бессменным фронтменом и лидером коллектива является <strong>Эйч Пи Бакстер</strong>, исполняющие все хиты за более чем 25-летний период существования легендарного трип. Порадует он и московских поклонников на концерте Scooter 13 марта.</span></p> <p></p> <p><span>Последний из хитов группа выпустила в конце прошлого года. Именно в поддержку этой композиции и альбома, в которую она вошла, был запланирован грандиозный тур. В его рамках мы и увидим Scooter в Москве. При этом столицу России германский коллектив посетит даже раньше, чем Великобританию, где также планируется дать несколько концертов. Поэтому не теряйте уникальный шанс насладиться любимой музыкой раньше европейцев, и скорее приобретайте билеты на Scooter в Adrenaline Stadium, пока они еще есть в наличии!</span></p>`}});
     for (let i = 0; i < events.length; i++) {
         _event = events[i];
 
