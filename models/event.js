@@ -31,6 +31,7 @@ const eventSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
     },
     ssr: Boolean,
+    ref_code: String,
 }, { timestamps: true, id: false });
 
 module.exports = mongoose.model('event', eventSchema);

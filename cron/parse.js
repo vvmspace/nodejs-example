@@ -34,6 +34,10 @@ const parse_xml = async () => {
     const events = obj.event_for_export_list.event_for_export_row;
     bar.start(events.length, 0);
     let _event;
+    const aliasesd = ['fedde-le-grand', 'matrang', 'og-buda', 'umaturman', 'agutin-leonid'];
+    aliasesd.map(async aliasd => await eventSchema.update({alias: 'agutin-leonid'}, {$set: {
+        ref_code: 'concertmoscowd'
+        }}));
     await eventSchema.update({alias: 'agutin-leonid'}, {$set: {ssr: true,
             description:
             `<p><strong>Леонид Агутин</strong> начал свою музыкальную карьеру в 1991 году, и вот уже почти 30 лет радует своих слушателей своим творчеством.</p>
