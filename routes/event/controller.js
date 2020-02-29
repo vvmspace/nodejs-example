@@ -34,12 +34,18 @@ class EventController{
             })
             .catch(e => e);
         const event = _event || {};
+
+        const task_name = `Написать анонс ${event.category.includes('онцерт') && 'концерта ' || ''}  ${event.name} в Москве`;
         const task_text = `
         #Задача:
-        Заменить текст https://concert.moscow/concert/${event.alias || event.uuid}
+        Написать анонс ${event.name}. Нужна замена текста https://concert.moscow/concert/${event.alias || event.uuid} на уникальный
         
         ## Ключевые слова:
         ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата]
+        Проявите фантазию. Смотрите wordstat.yandex.ru и ЦА
+        
+        ## Целевая аудитория:
+        Потенциальные посетители мероприятия, попадающие на сайт через поиск.
         
         ## Перед выполнением ознакомиться со скриншотом:
         https://concert.moscow/how_to_write.png
@@ -49,7 +55,7 @@ class EventController{
         
         
         `;
-        response.json({event, task_text});
+        response.json({event, task_text, task_name});
     }
 
     async getRock(request, response, next) {
