@@ -60,6 +60,11 @@ module.exports = services => {
     );
 
     router.get(
+        '/:uuid/text_task',
+        controller.getTextRequest,
+    );
+
+    router.get(
         '/:uuid',
         controller.getEventByUuid
     );
