@@ -52,7 +52,7 @@ class EventController{
         <p>&nbsp;</p>
        <h2>Необходимая длина:</h2>
        <p>500 - 1000 знаков без пробелов</p>
-        `.replace('\n','');
+        `.replace(/\n/g,'');
         response.json({event, task_text, task_name});
     }
 
