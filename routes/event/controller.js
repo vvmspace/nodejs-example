@@ -37,24 +37,22 @@ class EventController{
 
         const task_name = `Написать анонс ${event.category.includes('онцерт') && 'концерта ' || ''}  ${event.name} в Москве`;
         const task_text = `
-        #Задача:
-        Написать анонс ${event.name}. Нужна замена текста https://concert.moscow/concert/${event.alias || event.uuid} на уникальный
-        
-        ## Ключевые слова:
-        ${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата]
-        Проявите фантазию. Смотрите wordstat.yandex.ru и ЦА
-        
-        ## Целевая аудитория:
-        Потенциальные посетители мероприятия, попадающие на сайт через поиск.
-        
-        ## Перед выполнением ознакомиться со скриншотом:
-        https://concert.moscow/how_to_write.png
-        
-       ## Необходимая длина:
-       500 - 1000 знаков без пробелов
-        
-        
-        `;
+        <h1>Задача: Написать анонс ${event.name}.</h1>
+        <p>Нужна замена текста https://concert.moscow/concert/${event.alias || event.uuid} на уникальный</p>
+        <p>&nbsp;</p>
+        <h2>Ключевые слова:</h2>
+        <p>${event.name} в Москве, концерт ${event.name}, ${event.name} в ${event.venue.name}, ${event.name} [дата]</p>
+        <p>Проявите фантазию. Смотрите wordstat.yandex.ru и ЦА</p>
+        <p>&nbsp;</p>
+        <h2>Целевая аудитория:</h2>
+        <p>Потенциальные посетители мероприятия, попадающие на сайт через поиск.</p>
+        <p>&nbsp;</p>
+        <h2>Перед выполнением ознакомиться со скриншотом:</h2>
+        <p><a href="https://concert.moscow/how_to_write.png">https://concert.moscow/how_to_write.png</a>
+        <p>&nbsp;</p>
+       <h2>Необходимая длина:</h2>
+       <p>500 - 1000 знаков без пробелов</p>
+        `.replace('\n','');
         response.json({event, task_text, task_name});
     }
 
