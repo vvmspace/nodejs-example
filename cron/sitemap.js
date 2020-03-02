@@ -24,8 +24,8 @@ const sitemapper = async () => {
         .map(event => {
             // console.log(venues);
             return {
-                url: `https://concert.moscow/concert/${event.alias || event.uuid}`,
-                loc: `https://concert.moscow/concert/${event.alias || event.uuid}`,
+                url: event.ssr && `https://concert.moscow/${event.alias || event.uuid}` || `https://concert.moscow/concert/${event.alias || event.uuid}`,
+                loc: event.ssr && `https://concert.moscow/${event.alias || event.uuid}` || `https://concert.moscow/concert/${event.alias || event.uuid}`,
                 lastmod: new Date(event.updatedAt).toISOString(),
                 priority: event.ssr && 0.9 || (event.min_price > 2000) && 0.8 || (event.category.includes('Рок')) && 0.7|| 0.5,
                 changefreq: 'weekly',
