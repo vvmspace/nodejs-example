@@ -221,7 +221,7 @@ class EventController{
         const events = await this.models.event
             .find({$and:[{date: {$gte: new Date(2020,6,1)}},
                     {date: {$lte: new Date(2020,9,1)}},
-                    // {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
                     /*{min_price: {$gt: 499}}*/]})
             .populate({
                 path: 'venue',
