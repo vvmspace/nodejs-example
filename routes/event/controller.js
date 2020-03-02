@@ -222,7 +222,7 @@ class EventController{
             .find({$and:[{date: {$gte: new Date(2020,6,1)}},
                     {date: {$lte: new Date(2020,9,1)}},
                     {category: { $regex: '.*' + 'ерт' + '.*' }},
-                    {min_price: {$gt: 499}}]})
+                    {min_price: {$gt: 999}}]})
             .populate({
                 path: 'venue',
                 model: 'venue',
