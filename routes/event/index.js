@@ -50,6 +50,11 @@ module.exports = services => {
     );
 
     router.get(
+        '/summer',
+        controller.getSummer
+    );
+
+    router.get(
         '/weekends',
         controller.getWeekends
     );

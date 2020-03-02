@@ -21,6 +21,7 @@ class EventController{
         this.getHouse = this.getHouse.bind(services);
         this.getElectro = this.getElectro.bind(services);
         this.getAcoustic = this.getAcoustic.bind(services);
+        this.getSummer = this.getSummer.bind(services);
         this.getTextRequest = this.getTextRequest.bind(services);
     }
 
@@ -205,6 +206,21 @@ class EventController{
         const events = await this.models.event
             .find({$and:[{date: {$gte: tomorrow}},
                     {date: {$lt: tomorrow.add(1, 'days')}},
+                    {category: { $regex: '.*' + 'ерт' + '.*' }},
+                    {min_price: {$gt: 499}}]})
+            .populate({
+                path: 'venue',
+                model: 'venue',
+                select: '-events',
+            });
+        response.json({events});
+    }
+
+    async getSummer(request, response, next) {
+        const tomorrow = dateUtil.tomorrow();
+        const events = await this.models.event
+            .find({$and:[{date: {$gte: new Date(2020,6,1)}},
+                    {date: {$lte: new Date(2020,9,1)}},
                     {category: { $regex: '.*' + 'ерт' + '.*' }},
                     {min_price: {$gt: 499}}]})
             .populate({
