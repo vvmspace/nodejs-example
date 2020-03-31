@@ -41,6 +41,8 @@ const sitemapper = async () => {
         href: '/top',
     },{
         href: '/pop',
+    },{
+        href: '/coronavirus',
     }];
     const urls = [...eurls, ...vurls, customs.map(c => {return {
         url: `https://concert.moscow${c.href}`,
