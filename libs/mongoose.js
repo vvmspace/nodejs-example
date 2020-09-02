@@ -1,15 +1,4 @@
 const mongoose = require('mongoose');
-const mongooseCachebox = require('mongoose-cachebox');
-
-const cache_options = {
-    cache: true, // start caching
-    ttl: 30, // 30 seconds
-    engine: 'redis',
-    host: '127.0.0.1',
-    port: '6379',
-};
-
-mongooseCachebox(mongoose, cache_options);
 
 const log = require('./log');
 const config = require('../config');
